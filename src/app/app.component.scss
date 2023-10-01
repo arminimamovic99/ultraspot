@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 15px 0px 15px;
+  align-items: center;
+  img {
+    width: 85px;
+  }
+}
+
+.icongroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

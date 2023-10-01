@@ -1,0 +1,22 @@
+<h3>Vaša narudžba</h3>
+<div class="order-card-step" (click)="navigate(1)">
+  <div class="card-info">
+    <div class="icons">
+      <img src="assets/drink2.png" alt="">
+      <img src="assets/glass.png" alt="" style="margin-left: -22px">
+    </div>
+    <p>Korak 1: Izaberi piće</p>
+  </div>
+  <ng-container *ngIf="drinkItemSelected">
+    <small style="color: green; display: flex; justify-content: flex-end;">Ovaj korak je kompletiran!</small>
+  </ng-container>
+
+</div>
+<div class="order-card-step" (click)="navigate(2)">
+  <div class="card-info">
+    <div class="icons">
+      <img src="assets/hookahicon4.png" style="transform: rotate(-15deg); width: 75px" alt="">
+    </div>
+    <p>Korak 2: Izaberi nargilu</p>
+  </div>
+</div>

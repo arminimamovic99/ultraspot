@@ -1,0 +1,66 @@
+<ng-container>
+  <div class="title-container">
+    <h2 class="item-title" *ngIf="step === 1">Odaberi svoj topli ili osvježavajući napitak🍹</h2>
+    <h2 class="item-title" *ngIf="step === 2">Odaberi omiljenu nargilu</h2>
+  </div>
+  <div class="container">
+    <div class="card-grid">
+      <div class="card" *ngFor="let card of items">
+        <!-- Card content goes here -->
+        <img [src]="card.imgSrc" alt="">
+        <p class="item-title">{{card.name}}</p>
+        <div class="card-bottom">
+          <small>{{card.price}}</small>
+          <div class="icon-circle" *ngIf="!orderItems.includes(card.id)" (click)="addItemToOrder(card.id)">
+            <i class="pi pi-plus"></i>
+          </div>
+          <div class="icon-circle" *ngIf="orderItems.includes(card.id)" (click)="removeItemFromOrder(card.id)">
+            <i class="pi pi-minus"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<!-- <p *ngIf="step === 2">odaberi shishuke</p> -->
+<footer *ngIf="!isBottomSheetOpen">
+  <div class="footer-left">
+    Odabrano proizvoda:
+    <p class="item-title" style="margin-left: 3px">{{orderItems.length}}</p>
+  </div>
+
+  <div class="footer-right" *ngIf="orderItems.length > 0">
+    <button pButton pRipple label="Potvrdi i pređi na sljedeći korak" class="p-button-success" (click)="backToMainOrderScreen()"></button>
+  </div>
+</footer>
+
+<app-bottom-sheet [isOpen]="isBottomSheetOpen">
+  <!-- Content for the bottom sheet goes here -->
+  <div class="sheet-header">
+    <p>Opcije nargile</p>
+    <i class="pi pi-times" (click)="closeBottomSheet()"></i>
+  </div>
+
+  <p-accordion>
+    <p-accordionTab header="Odaberi cup">
+       <div class="option-card">
+          <div class="opt-card-left">
+            <img src="assets/cup1.jpeg" alt="">
+            <p>Glineni cup</p>
+          </div>
+          <input type="radio" name="cupType">
+       </div>
+       <div class="option-card">
+        <div class="opt-card-left">
+          <img src="assets/cup2.jpeg" alt="">
+          <p>Keramicki cup</p>
+        </div>
+          <input type="radio" name="cupType">
+       </div>
+    </p-accordionTab>
+    <p-accordionTab header="Odaberi ukus">
+        <p>Odaberi ukus </p>
+    </p-accordionTab>
+  </p-accordion>
+  <!-- <button (click)="closeBottomSheet()">Close</button> -->
+</app-bottom-sheet>

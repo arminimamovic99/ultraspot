@@ -1,0 +1,19 @@
+/* bottom-sheet.component.css */
+.bottom-sheet {
+  position: fixed;
+  bottom: -100%; /* Initially hidden off-screen */
+  left: 0;
+  right: 0;
+  background-color: white;
+  transition: bottom 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.bottom-sheet.open {
+  bottom: 0; /* Slides in when open */
+  height: 80%;
+}
+
+.bottom-sheet-content {
+  padding: 16px;
+}

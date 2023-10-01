@@ -1,0 +1,33 @@
+.order-card-step {
+  margin: 15px 10px;
+  flex-direction: column;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border-radius: 7px;
+  max-width: fit-content;
+  width: 75%;
+  height: fit-content;
+  padding: 13px;
+  .card-info {
+    display: flex;
+    align-items: center;
+  }
+  .icons {
+    width: 120px;
+    img {
+      width: 60px;
+    }
+    display: flex;
+    justify-content: center;
+  }
+  p {
+    font-family: Montserrat Bold;
+  }
+}
+
+h3 {
+  font-family: Montserrat Bold;
+  padding: 5px 10px;
+}
