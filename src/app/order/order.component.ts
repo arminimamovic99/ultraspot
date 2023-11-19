@@ -12,16 +12,20 @@ export class OrderComponent {
   router = inject(Router);
   orderStateService = inject(OrderStateService);
   drinkItemSelected = false;
+  hookahSelected = false;
+
+  totalPrice: number = 0;
 
   ngOnInit() {
     this.orderStateService.getOrderItems$()
       .pipe(
         tap((items) => {
           if (Object.keys(items).length === 0) return;
-          console.log({items});
+          this.totalPrice = items.reduce((sum, current) => sum + current.price, 0);
 
           items.forEach((item) => {
             if (item.type === 1) this.drinkItemSelected = true;
+            if (item.type === 2) this.hookahSelected = true;
           })
         })
       ).subscribe();

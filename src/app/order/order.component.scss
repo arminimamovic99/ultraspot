@@ -1,4 +1,5 @@
 .order-card-step {
+  font-size: 19px;
   margin: 15px 10px;
   flex-direction: column;
   display: flex;
@@ -30,4 +31,32 @@
 h3 {
   font-family: Montserrat Bold;
   padding: 5px 10px;
+}
+
+.center-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 50px;
+  button {
+    font-size: 23px;
+  }
+}
+
+footer {
+  border-top: 1px solid var(--surface-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: white;
+  padding-bottom: 20px; /* Adjust padding as needed */
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
+  .footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+  }
 }

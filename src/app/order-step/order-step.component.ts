@@ -1,8 +1,8 @@
-import { hookahs, drinks } from './../mock/items';
-import { Component, inject } from '@angular/core';
+import { hookahs, drinks, flavors } from './../mock/items';
+import { Component, EventEmitter, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs';
-import { IOrderItem } from '../models/order-item';
+import { from, tap } from 'rxjs';
+import { IHookahOptions, IOrderItem } from '../models/order-item';
 import { OrderStateService } from '../services/order-state.service';
 
 @Component({
@@ -16,13 +16,22 @@ export class OrderStepComponent {
   orderStateService = inject(OrderStateService);
   step: number = 1;
 
+  cupType: string = 'Keramicki';
+  flavorSettings: string[] = [];
   isBottomSheetOpen = false;
   orderItems: any[] = [];
   items: IOrderItem[] = [];
+  allTypeItems: IOrderItem[] = [];
+  flavors = flavors;
+  selectedHookah?: number;
+  hookahOptions?: IHookahOptions;
+  toggleSheetVisible$ = new EventEmitter<boolean>();
+
   ngOnInit(): void {
     this.route.params.pipe(
       tap((data: any) => {
         this.step = +data.stepId
+        this.allTypeItems = drinks.concat(hookahs);
         if (this.step === 1) this.items = drinks;
         else if (this.step === 2) this.items = hookahs
       })
@@ -33,7 +42,9 @@ export class OrderStepComponent {
         tap((data) => {
           if (Object.keys(data).length === 0) return;
           data.forEach((item) => {
-            if (item.type === this.step) this.orderItems.push(item.id)
+            if (!this.orderItems.includes(item.id)) {
+              this.orderItems.push(item.id)
+            }
           })
         })
       ).subscribe()
@@ -41,6 +52,7 @@ export class OrderStepComponent {
 
   addItemToOrder(id: number) {
     if (this.step === 2) {
+      this.selectedHookah = id;
       return this.openBottomSheet();
     }
     this.orderItems.push(id);
@@ -58,8 +70,14 @@ export class OrderStepComponent {
   emitOrderState() {
     const itemsToEmit: IOrderItem[] = [];
     this.orderItems.forEach((id: number) => {
-      const item = this.items.find((item) => item.id === id);
+      let item = this.allTypeItems.find((item) => item.id === id);
       if (!item) return;
+      if (item.type === 2) {
+        item = {
+          ...item,
+          options: this.hookahOptions
+        }
+      }
       itemsToEmit.push(item);
     })
 
@@ -72,5 +90,34 @@ export class OrderStepComponent {
 
   closeBottomSheet() {
     this.isBottomSheetOpen = false;
+    this.toggleSheetVisible$.emit(false);
+  }
+
+  selectCup(data: string) {
+    this.cupType = data;
+  }
+
+  setFlavor(data: string) {
+    if (this.flavorSettings.includes(data)) {
+      const fromArr = this.flavorSettings.find((str) => str === data);
+      if (!fromArr) return
+      const index = this.flavorSettings.indexOf(fromArr);
+      this.flavorSettings.splice(index, 1);
+      return;
+    }
+    this.flavorSettings.push(data);
+  }
+
+
+  configureHookahAndEmit() {
+    this.hookahOptions = {
+      cupType: this.cupType,
+      flavorSettings: this.flavorSettings
+    }
+    this.orderItems.push(this.selectedHookah);
+    this.emitOrderState();
+
+    this.isBottomSheetOpen = false;
+    this.toggleSheetVisible$.emit(false);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-bottom-sheet',
@@ -7,7 +7,16 @@ import { Component, Input } from '@angular/core';
 })
 export class BottomSheetComponent {
   @Input() isOpen = false;
+  @Input() toggleEmitter?: EventEmitter<boolean>;
 
+  ngOnInit() {
+    if (this.toggleEmitter) {
+      this.toggleEmitter.subscribe((data) => {
+        console.log({data})
+        this.isOpen = data;
+      });
+    }
+  }
   open() {
     this.isOpen = true;
   }
