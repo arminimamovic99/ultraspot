@@ -61,6 +61,12 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
+  div {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .option-card {

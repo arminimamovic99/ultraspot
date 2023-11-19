@@ -19,4 +19,16 @@
     </div>
     <p>Korak 2: Izaberi nargilu</p>
   </div>
+  <ng-container *ngIf="hookahSelected">
+    <small style="color: green; display: flex; justify-content: flex-end;">Ovaj korak je kompletiran!</small>
+  </ng-container>
+</div>
+
+
+<footer *ngIf="drinkItemSelected || hookahSelected">
+  <h3>Total: {{totalPrice}}KM</h3>
+  <button pButton pRipple class="p-button-success" label="Posalji narudzbu" size="large" iconPos="right" icon="pi pi-check"></button>
+</footer>
+
+<div class="center-container" *ngIf="drinkItemSelected && hookahSelected">
 </div>

@@ -10,7 +10,7 @@
         <img [src]="card.imgSrc" alt="">
         <p class="item-title">{{card.name}}</p>
         <div class="card-bottom">
-          <small>{{card.price}}</small>
+          <small>{{card.price}}KM</small>
           <div class="icon-circle" *ngIf="!orderItems.includes(card.id)" (click)="addItemToOrder(card.id)">
             <i class="pi pi-plus"></i>
           </div>
@@ -34,11 +34,14 @@
   </div>
 </footer>
 
-<app-bottom-sheet [isOpen]="isBottomSheetOpen">
+<app-bottom-sheet [isOpen]="isBottomSheetOpen" [toggleEmitter]="toggleSheetVisible$">
   <!-- Content for the bottom sheet goes here -->
   <div class="sheet-header">
     <p>Opcije nargile</p>
-    <i class="pi pi-times" (click)="closeBottomSheet()"></i>
+    <div>
+      <button pButton class="p-button-success" icon="pi pi-check" severity="success" (click)="configureHookahAndEmit()"></button>
+      <button pButton class="p-button-danger" icon="pi pi-times" severity="danger"></button>
+    </div>
   </div>
 
   <p-accordion>
@@ -48,18 +51,24 @@
             <img src="assets/cup1.jpeg" alt="">
             <p>Glineni cup</p>
           </div>
-          <input type="radio" name="cupType">
+          <input type="radio" name="cupType" (change)="selectCup('Glineni cup')">
        </div>
        <div class="option-card">
         <div class="opt-card-left">
           <img src="assets/cup2.jpeg" alt="">
           <p>Keramicki cup</p>
         </div>
-          <input type="radio" name="cupType">
+          <input type="radio" name="cupType" (change)="selectCup('Keramicki')">
        </div>
     </p-accordionTab>
     <p-accordionTab header="Odaberi ukus">
-        <p>Odaberi ukus </p>
+      <div class="option-card" *ngFor="let flavor of flavors">
+        <div class="opt-card-left">
+          <!-- <img src="assets/cup1.jpeg" alt=""> -->
+          <p>{{flavor}}</p>
+        </div>
+        <input type="checkbox" name="cupType" (change)="setFlavor(flavor)">
+     </div>
     </p-accordionTab>
   </p-accordion>
   <!-- <button (click)="closeBottomSheet()">Close</button> -->
