@@ -4,7 +4,65 @@
   </div>
 
   <div class="home-buttons">
-    <p-button label="Prijavi se" styleClass="p-button-secondary"></p-button>
-    <p-button label="Nastavi kao gost" styleClass="p-button-secondary" (click)="navigate()"></p-button>
-  </div>
+    <p-button label="Prijavi se" styleClass="p-button-secondary" (click)="loginOptionsExpanded = !loginOptionsExpanded"></p-button>
+    <div *ngIf="loginOptionsExpanded" class="login-options">
+      <ng-container *ngIf="loginOption === 1">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-envelope"></i>
+          </span>
+          <input pInputText placeholder="Email" [(ngModel)]="email" />
+        </div>
+
+        <!-- <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-user"></i>
+          </span>
+          <input pInputText placeholder="Korisnicko ime" />
+        </div> -->
+
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-eye-slash"></i>
+          </span>
+          <input pInputText placeholder="Password" [(ngModel)]="pword" />
+        </div>
+
+        <button *ngIf="email !== '' && pword !== ''" pButton class="p-button-primary" (click)="initSignIn()">Prijavi se</button>
+        <button *ngIf="email === '' || pword === ''" pButton class="p-button-primary" [disabled]="true">Prijavi se</button>
+
+
+        <p (click)="loginOption = 2"><u>Nemas racun? Kreiraj ga ovdje.</u></p>
+      </ng-container>
+      <ng-container *ngIf="loginOption === 2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-envelope"></i>
+          </span>
+          <input pInputText placeholder="Email" [(ngModel)]="email" />
+        </div>
+
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-user"></i>
+          </span>
+          <input pInputText placeholder="Korisnicko ime" [(ngModel)]="username" />
+        </div>
+
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">
+              <i class="pi pi-eye-slash"></i>
+          </span>
+          <input pInputText placeholder="Password" [(ngModel)]="pword" />
+        </div>
+
+        <button *ngIf="email !== '' && pword !== ''"  pButton class="p-button-primary" (click)="initSignup()">Kreiraj racun</button>
+        <button *ngIf="email === '' || pword === ''"  pButton class="p-button-primary" [disabled]="true">Kreiraj racun</button>
+
+        <p (click)="loginOption = 1"><u>Vec imas racun? Prijavi se.</u></p>
+      </ng-container>
+
+
+    </div>
+  <p-button label="Nastavi kao gost" styleClass="p-button-secondary" (click)="navigate()"></p-button>
 </div>
