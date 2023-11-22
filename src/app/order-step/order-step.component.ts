@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { from, tap } from 'rxjs';
 import { IHookahOptions, IOrderItem } from '../models/order-item';
 import { OrderStateService } from '../services/order-state.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-order-step',
@@ -14,6 +15,7 @@ export class OrderStepComponent {
   route = inject(ActivatedRoute);
   router = inject(Router);
   orderStateService = inject(OrderStateService);
+  dataService = inject(DataService);
   step: number = 1;
 
   cupType: string = 'Keramicki';
@@ -28,12 +30,19 @@ export class OrderStepComponent {
   toggleSheetVisible$ = new EventEmitter<boolean>();
 
   ngOnInit(): void {
+  this.dataService.getItems()
+    .pipe(
+      tap((data) => {
+        this.allTypeItems = data;
+        if (this.step === 1) this.items = data.filter((item) => item.type === 1)
+        if (this.step === 2) this.items = data.filter((item) => item.type === 2)
+      }
+      )
+    ).subscribe();
+
     this.route.params.pipe(
       tap((data: any) => {
         this.step = +data.stepId
-        this.allTypeItems = drinks.concat(hookahs);
-        if (this.step === 1) this.items = drinks;
-        else if (this.step === 2) this.items = hookahs
       })
     ).subscribe();
 

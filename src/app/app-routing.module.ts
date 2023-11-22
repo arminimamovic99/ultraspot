@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { OrderComponent } from './order/order.component';
 import { OrderStepComponent } from './order-step/order-step.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'order',
-    component: OrderComponent
+    component: OrderComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'order/:stepId',

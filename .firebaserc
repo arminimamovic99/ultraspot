@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ultraspot-fc42a": {
+      "hosting": {
+        "ultraspot": [
+          "ultraspot-fc42a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ultraspot-fc42a"
+  }
+}

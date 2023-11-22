@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderStateService } from '../services/order-state.service';
 import { tap } from 'rxjs';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-order',
@@ -11,6 +12,7 @@ import { tap } from 'rxjs';
 export class OrderComponent {
   router = inject(Router);
   orderStateService = inject(OrderStateService);
+  dataService = inject(DataService);
   drinkItemSelected = false;
   hookahSelected = false;
 
