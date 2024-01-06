@@ -1,6 +1,4 @@
-// data.service.ts
-
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -13,10 +11,11 @@ import { IOrderItem } from '../models/order-item';
 })
 export class DataService {
   private itemsCollection: AngularFirestoreCollection<any>;
+  private afs = inject(AngularFirestore);
   items: Observable<IOrderItem[]>;
 
-  constructor(private afs: AngularFirestore) {
-    this.itemsCollection = afs.collection<IOrderItem>('articles');
+  constructor() {
+    this.itemsCollection = this.afs.collection<IOrderItem>('articles');
     this.items = this.itemsCollection.valueChanges();
   }
 

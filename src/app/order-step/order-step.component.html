@@ -7,22 +7,30 @@
     <div class="card-grid">
       <div class="card" *ngFor="let card of items">
         <!-- Card content goes here -->
-        <img [src]="card.imgSrc" alt="">
+        <img *ngIf="card.type === 1" src="/assets/drink.png" alt="">
+        <img *ngIf="card.type === 2" src="/assets/hookahicon.png" alt="">
         <p class="item-title">{{card.name}}</p>
         <div class="card-bottom">
           <small>{{card.price}}KM</small>
           <div class="icon-circle" *ngIf="!orderItems.includes(card.id)" (click)="addItemToOrder(card.id)">
             <i class="pi pi-plus"></i>
           </div>
-          <div class="icon-circle" *ngIf="orderItems.includes(card.id)" (click)="removeItemFromOrder(card.id)">
-            <i class="pi pi-minus"></i>
-          </div>
+          <ng-container *ngIf="orderItems.includes(card.id)">
+            <div class="icon-circle" (click)="removeItemFromOrder(card.id)">
+              <i class="pi pi-minus"></i>
+            </div>
+            <p>{{getAmountOfItemInOrder(card.id)}}</p>
+            <div class="icon-circle" (click)="addItemToOrder(card.id)">
+              <i class="pi pi-plus"></i>
+            </div>
+          </ng-container>
+
         </div>
       </div>
     </div>
   </div>
 </ng-container>
-<!-- <p *ngIf="step === 2">odaberi shishuke</p> -->
+<div style="height: 100px"></div>
 <footer *ngIf="!isBottomSheetOpen">
   <div class="footer-left">
     Odabrano proizvoda:
@@ -35,7 +43,6 @@
 </footer>
 
 <app-bottom-sheet [isOpen]="isBottomSheetOpen" [toggleEmitter]="toggleSheetVisible$">
-  <!-- Content for the bottom sheet goes here -->
   <div class="sheet-header">
     <p>Opcije nargile</p>
     <div>

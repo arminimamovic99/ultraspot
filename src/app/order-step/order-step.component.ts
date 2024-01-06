@@ -67,6 +67,10 @@ export class OrderStepComponent {
     this.orderItems.push(id);
   }
 
+
+  getAmountOfItemInOrder(id: number) {
+    return this.orderItems.filter((item) => item === id)?.length;
+  }
   removeItemFromOrder(id: number) {
     this.orderItems.splice(this.orderItems.indexOf(id), 1);
   }

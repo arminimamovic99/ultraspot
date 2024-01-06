@@ -24,10 +24,10 @@
   </ng-container>
 </div>
 
-
 <footer *ngIf="drinkItemSelected || hookahSelected">
   <h3>Total: {{totalPrice}}KM</h3>
-  <button pButton pRipple class="p-button-success" label="Posalji narudzbu" size="large" iconPos="right" icon="pi pi-check"></button>
+  <button pButton pRipple class="p-button-success" label="Posalji narudzbu" size="large" iconPos="right" icon="pi pi-check">
+  </button>
 </footer>
 
 <div class="center-container" *ngIf="drinkItemSelected && hookahSelected">

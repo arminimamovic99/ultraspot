@@ -11,7 +11,8 @@
 
 .bottom-sheet.open {
   bottom: 0; /* Slides in when open */
-  height: 80%;
+  height: 60%;
+  overflow-y: scroll
 }
 
 .bottom-sheet-content {

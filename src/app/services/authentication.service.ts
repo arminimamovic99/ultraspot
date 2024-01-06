@@ -20,19 +20,19 @@ export class AuthenticationService {
         console.log(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+       // window.alert(error.message);
       });
   }
 
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        window.alert(error.message);
-      });
+      // .then((result) => {
+      //   console.log(result);
+      // })
+      // .catch((error) => {
+      // // window.alert(error.message);
+      // });
   }
 
   async SignOut() {

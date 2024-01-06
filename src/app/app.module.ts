@@ -18,7 +18,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
-
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -40,6 +41,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AuthModule } from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
+import { MessageService } from 'primeng/api';
 
 
 // import {} from '@angular/fire'
@@ -67,6 +69,8 @@ import { AngularFireModule } from '@angular/fire/compat';
     CardModule,
     TimelineModule,
     AccordionModule,
+    MessagesModule,
+    ToastModule,
     BrowserAnimationsModule,
     FormsModule,
     AngularFireAuthModule,
@@ -80,7 +84,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     providePerformance(() => getPerformance()),
     provideStorage(() => getStorage())
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,10 +3,14 @@
     <img src="/assets/logo-no-bg.png" alt="">
   </div>
 
+  <p-toast *ngIf="showSuccessLogin" position="bottom-center" key="bc"></p-toast>
+
+
   <div class="home-buttons">
     <p-button label="Prijavi se" styleClass="p-button-secondary" (click)="loginOptionsExpanded = !loginOptionsExpanded"></p-button>
     <div *ngIf="loginOptionsExpanded" class="login-options">
       <ng-container *ngIf="loginOption === 1">
+        <p class="error-text" *ngIf="displayError">Greska: Pogresni podaci*</p>
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon">
               <i class="pi pi-envelope"></i>
@@ -25,7 +29,7 @@
           <span class="p-inputgroup-addon">
               <i class="pi pi-eye-slash"></i>
           </span>
-          <input pInputText placeholder="Password" [(ngModel)]="pword" />
+          <input pInputText placeholder="Password" type="password" [(ngModel)]="pword" />
         </div>
 
         <button *ngIf="email !== '' && pword !== ''" pButton class="p-button-primary" (click)="initSignIn()">Prijavi se</button>
