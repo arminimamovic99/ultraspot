@@ -3,12 +3,19 @@
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  width: 150px;
+  width: 160px;
+  height: 250px;
   padding: 10px;
+  position: relative;
   .card-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 140px;
+   // padding-right: 15px;
+    padding-bottom: 5px;
     .icon-circle {
       border-radius: 100%;
       padding: 8px;

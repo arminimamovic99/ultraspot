@@ -1,6 +1,7 @@
 
 <div class="main-panel">
 <h1>Dobro došli u Ultra Spot!</h1>
+<p-toast *ngIf="showSuccessLogin" position="bottom-center" key="bc"></p-toast>
 
 <p-button label="Započnite narudžbu" styleClass="p-button-danger" (click)="navigate()"></p-button>
 

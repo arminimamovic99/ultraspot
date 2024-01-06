@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,17 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   private router = inject(Router);
+  private route = inject(ActivatedRoute)
+  showSuccessLogin = false;
+
+  ngOnInit() {
+    this.route.params.pipe(
+      tap((res) => {
+        console.log({res});
+      })
+    ).subscribe();
+  }
   navigate() {
-    this.router.navigate(['order']);
+    this.router.navigate(['order'], {queryParams: {loginSuccess: true} });
   }
 }
