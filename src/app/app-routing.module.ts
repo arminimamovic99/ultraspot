@@ -28,7 +28,11 @@ const routes: Routes = [
   {
     path: 'order/:stepId',
     component: OrderStepComponent
-  }
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
 ];
 
 @NgModule({

@@ -42,6 +42,7 @@ import { AuthModule } from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { MessageService } from 'primeng/api';
+import { AdminModule } from './admin/admin.module';
 
 
 // import {} from '@angular/fire'
@@ -74,6 +75,7 @@ import { MessageService } from 'primeng/api';
     BrowserAnimationsModule,
     FormsModule,
     AngularFireAuthModule,
+    AdminModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

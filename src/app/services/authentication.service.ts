@@ -1,12 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
+import { UserInfoService } from './user-info.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   afAuth = inject(AngularFireAuth);
+  userInfoService = inject(UserInfoService);
   user$: Observable<firebase.default.User | null>;
 
   constructor() {
@@ -16,8 +18,8 @@ export class AuthenticationService {
   SignUp(email: string, password: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then((result: any) => {
+        this.userInfoService.setUserInfo({id: result.user._delegate.uid, role: 'User' })
       })
       .catch((error) => {
        // window.alert(error.message);
